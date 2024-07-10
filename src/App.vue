@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeaderTop from "./components/Header.vue";
+import Header from "./components/Header.vue";
 import IconInput from "./components/IconInput.vue";
 import TipSummary from "./components/TipSummary.vue";
 import { ref } from "vue";
@@ -8,30 +8,27 @@ import useFormStore from "./stores/form";
 const tipVals = [5, 10, 15, 25, 50];
 const customValue = ref(0);
 const { data } = useFormStore();
-
-// const useCustomValue = function () {}
 </script>
 
 <template>
-  <HeaderTop />
+  <Header />
   <main class="bg-white p-6 rounded-md mt-10">
-    <form action="" class="space-y-4">
+    <form class="space-y-4" @submit.prevent>
       <div>
-        <label for="" class="">Bill</label>
-        <IconInput icon="dollar" name="bill" />
+        <IconInput icon="dollar" name="bill" label="Bill" />
       </div>
 
       <div>
         <span class="mb-4">Select Tip %</span>
-        <div class="grid grid-cols-2 gap-10 mt-4">
+        <div class="grid grid-cols-2 gap-4 mt-4">
           <label
             v-for="number in tipVals"
             :key="number"
             :class="{
-              'bg-very-dark-cyan': number !== data.tipPercentage,
-              'bg-strong-cyan': number == data.tipPercentage,
+              'bg-very-dark-cyan text-white': number !== data.tipPercentage,
+              'bg-strong-cyan text-very-dark-cyan': number == data.tipPercentage,
             }"
-            class="rounded-md text-center text-xl font-semibold text-white w-full p-3"
+            class="rounded-md text-center text-xl font-semibold w-full p-3"
           >
             <input
               type="radio"
@@ -44,7 +41,13 @@ const { data } = useFormStore();
             <span class=""> {{ number }}% </span>
           </label>
           <div>
-            <input type="radio" name="tipVal" id="custom" class="hidden" value="0" />
+            <input
+              type="radio"
+              name="tipVal"
+              id="custom"
+              class="hidden"
+              :value="customValue"
+            />
             <label for="custom">
               <span
                 ><input
@@ -61,8 +64,7 @@ const { data } = useFormStore();
       </div>
 
       <div>
-        <label for="">Number Of Persons</label>
-        <IconInput icon="person" name="persons" />
+        <IconInput icon="person" name="persons" label="Number Of People" />
       </div>
 
       <TipSummary />

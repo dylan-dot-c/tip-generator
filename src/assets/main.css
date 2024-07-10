@@ -12,7 +12,4 @@
   body {
     @apply bg-strong-cyan;
   }
-  label {
-    @apply text-strong-cyan text-xl font-bold;
-  }
 }

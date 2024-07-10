@@ -12,23 +12,26 @@ const icons = {
 type Props = {
   icon: "dollar" | "person";
   name: keyof FormData;
+  label: string;
 };
 
 const props = defineProps<Props>();
-const formName = props.name;
+const { icon, name, label } = props;
 const { data } = useFormData();
 </script>
 
 <template>
-  <div class="relative">
+  <label :for="label" class="text-grayish-cyan">{{ label }}</label>
+  <div class="relative mt-2">
     <span class="absolute h-full flex items-center">
-      <img :src="icons[props.icon]" alt="" class="pl-3" />
+      <img :src="icons[icon]" alt="" class="pl-3" />
     </span>
     <input
       type="number"
-      :name="formName"
-      v-model="data[formName]"
-      class="p-2 pl-8 text-right w-full border-none outline-none rounded-md text-2xl font-space-mono text-very-dark-cyan font-bold bg-very-light-cyan"
+      :name="name"
+      v-model="data[name]"
+      :id="label"
+      class="p-2 pl-8 text-right w-full border border-transparent outline-none rounded-md text-2xl font-space-mono text-very-dark-cyan font-bold bg-very-light-cyan cursor-pointer focus:border-strong-cyan focus:border"
     />
   </div>
 </template>
