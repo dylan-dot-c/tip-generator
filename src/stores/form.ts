@@ -1,9 +1,15 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
+export interface FormData {
+  persons: number
+  tipPercentage: number
+  bill: number
+}
+
 // global store for the application
 const useFormStore = defineStore('form-data', () => {
-  const data = ref({ persons: 0, tipPercentage: 0, bill: 0 })
+  const data = ref<FormData>({ persons: 0, tipPercentage: 0, bill: 0 })
 
   const tipPerPerson = computed(() => {
     const value = (data.value.bill * data.value.tipPercentage) / 100 / data.value.persons

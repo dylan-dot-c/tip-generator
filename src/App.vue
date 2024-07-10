@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import Header from './components/Header.vue'
-import IconInput from './components/IconInput.vue'
-import TipSummary from './components/TipSummary.vue'
-import { ref } from 'vue'
-import useFormStore from './stores/form'
+import HeaderTop from "./components/Header.vue";
+import IconInput from "./components/IconInput.vue";
+import TipSummary from "./components/TipSummary.vue";
+import { ref } from "vue";
+import useFormStore from "./stores/form";
 
-const tipVals = [5, 10, 15, 25, 50]
-const customValue = ref(0)
-const { data } = useFormStore()
+const tipVals = [5, 10, 15, 25, 50];
+const customValue = ref(0);
+const { data } = useFormStore();
 
 // const useCustomValue = function () {}
 </script>
 
 <template>
-  <Header />
+  <HeaderTop />
   <main class="bg-white p-6 rounded-md mt-10">
     <form action="" class="space-y-4">
       <div>
@@ -29,14 +29,14 @@ const { data } = useFormStore()
             :key="number"
             :class="{
               'bg-very-dark-cyan': number !== data.tipPercentage,
-              'bg-strong-cyan': number == data.tipPercentage
+              'bg-strong-cyan': number == data.tipPercentage,
             }"
             class="rounded-md text-center text-xl font-semibold text-white w-full p-3"
           >
             <input
               type="radio"
               :value="number"
-              :id="number"
+              :id="'id' + number"
               name="tipVal"
               v-model="data.tipPercentage"
               class="hidden"
@@ -48,7 +48,6 @@ const { data } = useFormStore()
             <label for="custom">
               <span
                 ><input
-                  v-on:click="currentTip = 0"
                   v-model="customValue"
                   type="number"
                   name=""
