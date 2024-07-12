@@ -63,6 +63,8 @@ const useFormStore = defineStore('form-data', () => {
     data.persons = 0
     data.tipPercentage = 0
     data.bill = 0
+    data.customPercentage = 0
+    data.useCustom = false
   }
 
   return { data, tipPerPerson, perPersonPay, reset }

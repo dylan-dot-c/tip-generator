@@ -2,12 +2,29 @@
 import Header from "./components/Header.vue";
 import IconInput from "./components/IconInput.vue";
 import TipSummary from "./components/TipSummary.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import useFormStore from "./stores/form";
 
 const tipVals = [5, 10, 15, 25, 50];
 const customValue = ref(0);
 const { data } = useFormStore();
+const customInput = ref<HTMLInputElement | null>(null);
+
+onMounted(() => {
+  console.log("Mounted", customInput);
+  if (customInput.value) {
+    // customInput.value.focus();
+    customInput.value.value = "";
+  }
+});
+
+const handleCustomClick = () => {
+  data.tipPercentage = 0;
+  if (customInput.value) {
+    customInput.value.focus();
+    data.useCustom = true;
+  }
+};
 </script>
 
 <template>
@@ -38,6 +55,7 @@ const { data } = useFormStore();
               name="tipVal"
               v-model="data.tipPercentage"
               class="hidden"
+              @click="data.useCustom = false"
             />
             <span class=""> {{ number }}% </span>
           </label>
@@ -52,13 +70,14 @@ const { data } = useFormStore();
             <label for="custom">
               <span
                 ><input
-                  v-model="customValue"
+                  v-model="data.customPercentage"
                   type="number"
-                  name=""
+                  name="custom"
                   placeholder="Custom"
                   id="custom"
-                  @click="data.tipPercentage = 0"
-                  class="text-right p-3 w-full text-xl bg-very-light-cyan placeholder:text-very-dark-cyan placeholder:font-bold"
+                  ref="customInput"
+                  @click="handleCustomClick"
+                  class="text-right p-3 w-full text-xl bg-very-light-cyan placeholder:text-very-dark-cyan placeholder:font-bold border border-transparent focus:border-strong-cyan outline-none rounded-md"
               /></span>
             </label>
           </div>
