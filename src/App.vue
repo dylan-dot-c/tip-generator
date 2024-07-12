@@ -13,7 +13,7 @@ const { data } = useFormStore();
 <template>
   <Header />
   <main class="bg-white p-6 rounded-md mt-10">
-    <form class="space-y-4" @submit.prevent>
+    <form class="space-y-4" @submit.prevent :key="data.tipPercentage">
       <div>
         <IconInput icon="dollar" name="bill" label="Bill" />
       </div>
@@ -24,6 +24,7 @@ const { data } = useFormStore();
           <label
             v-for="number in tipVals"
             :key="number"
+            :for="'id' + number"
             :class="{
               'bg-very-dark-cyan text-white': number !== data.tipPercentage,
               'bg-strong-cyan text-very-dark-cyan': number == data.tipPercentage,
@@ -45,8 +46,8 @@ const { data } = useFormStore();
               type="radio"
               name="tipVal"
               id="custom"
-              class="hidden"
               :value="customValue"
+              class="hidden"
             />
             <label for="custom">
               <span
@@ -55,7 +56,8 @@ const { data } = useFormStore();
                   type="number"
                   name=""
                   placeholder="Custom"
-                  id=""
+                  id="custom"
+                  @click="data.tipPercentage = 0"
                   class="text-right p-3 w-full text-xl bg-very-light-cyan placeholder:text-very-dark-cyan placeholder:font-bold"
               /></span>
             </label>
