@@ -29,7 +29,7 @@ const handleCustomClick = () => {
 
 <template>
   <Header />
-  <main class="bg-white md:rounded-3xl rounded-t-3xl rounded-l-3xl mt-10 xl:max-w-4xl m-auto p-8">
+  <main class="bg-white md:rounded-3xl rounded-t-3xl mt-10 xl:max-w-4xl m-auto p-8">
     <form
       class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-10"
       @submit.prevent
@@ -51,7 +51,7 @@ const handleCustomClick = () => {
                 'bg-very-dark-cyan text-white': number !== data.tipPercentage,
                 'bg-strong-cyan text-very-dark-cyan': number == data.tipPercentage
               }"
-              class="rounded-md text-center text-xl font-semibold w-full p-3"
+              class="rounded-md text-center text-xl font-semibold w-full p-3 cursor-pointer transition"
             >
               <input
                 type="radio"

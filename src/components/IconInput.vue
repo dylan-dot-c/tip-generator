@@ -37,8 +37,11 @@ const inputId = ref(`input-${name}-${Math.random().toString(36).substr(2, 9)}`)
       :name="name"
       v-model="data[name]"
       :id="inputId"
-      class="p-2 pl-8 text-right w-full border border-transparent outline-none rounded-md text-xl font-space-mono text-very-dark-cyan font-bold bg-very-light-cyan cursor-pointer focus:border-strong-cyan focus:border"
-      :class="{ 'border-red-400': name == 'persons' && data.error[name] }"
+      class="p-2 pl-8 text-right w-full outline-none rounded-md text-xl font-space-mono text-very-dark-cyan font-bold bg-very-light-cyan cursor-pointer focus:border-strong-cyan focus:border"
+      :class="{
+        'border-red-400 border': data.error[name],
+        'border border-transparent': !data.error[name]
+      }"
     />
   </div>
 </template>
