@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Header from './components/Header.vue'
+import HeaderLogo from './components/HeaderLogo.vue'
 import IconInput from './components/IconInput.vue'
 import TipSummary from './components/TipSummary.vue'
 import { ref, onMounted } from 'vue'
@@ -28,7 +28,7 @@ const handleCustomClick = () => {
 </script>
 
 <template>
-  <Header />
+  <HeaderLogo />
   <main class="bg-white md:rounded-3xl rounded-t-3xl mt-10 xl:max-w-4xl m-auto p-8">
     <form
       class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-10"
