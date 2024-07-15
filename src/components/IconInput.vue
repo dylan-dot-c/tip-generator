@@ -1,26 +1,27 @@
 <script setup lang="ts">
-import dollarIcon from '../assets/images/icon-dollar.svg'
-import personIcon from '../assets/images/icon-person.svg'
-import useFormData from '../stores/form'
-import { ref } from 'vue'
+import dollarIcon from "../assets/images/icon-dollar.svg";
+import personIcon from "../assets/images/icon-person.svg";
+import useFormData from "../stores/form";
+import { ref } from "vue";
 
 const icons = {
   dollar: dollarIcon,
-  person: personIcon
-}
+  person: personIcon,
+};
 
 type Props = {
-  icon: 'dollar' | 'person'
-  name: 'persons' | 'tipPercentage' | 'bill'
-  label: string
-}
+  icon: "dollar" | "person";
+  name: "persons" | "tipPercentage" | "bill";
+  label: string;
+};
 
-const props = defineProps<Props>()
-const { icon, name, label } = props
-const { data } = useFormData()
+const props = defineProps<Props>();
+const { icon, name, label } = props;
+const { data } = useFormData();
 
 // Generate a unique ID for the input
-const inputId = ref(`input-${name}-${Math.random().toString(36).substr(2, 9)}`)
+const inputId = ref(`input-${name}-${Math.random().toString(36).substr(2, 9)}`);
+const inputRef = ref<HTMLInputElement | null>(null);
 </script>
 
 <template>
@@ -33,6 +34,7 @@ const inputId = ref(`input-${name}-${Math.random().toString(36).substr(2, 9)}`)
       <img :src="icons[icon]" alt="" class="pl-3" />
     </span>
     <input
+      ref="inputRef"
       type="number"
       :name="name"
       v-model="data[name]"
@@ -40,7 +42,7 @@ const inputId = ref(`input-${name}-${Math.random().toString(36).substr(2, 9)}`)
       class="p-2 pl-8 text-right w-full outline-none rounded-md text-xl font-space-mono text-very-dark-cyan font-bold bg-very-light-cyan cursor-pointer focus:border-strong-cyan focus:border"
       :class="{
         'border-red-400 border': data.error[name],
-        'border border-transparent': !data.error[name]
+        'border border-transparent': !data.error[name],
       }"
     />
   </div>

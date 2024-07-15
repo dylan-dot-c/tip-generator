@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 import { computed, reactive } from 'vue'
 
 export interface FormData {
-  persons: number
+  persons: string
   tipPercentage: number
-  bill: number
-  customPercentage: number
+  bill: string
+  customPercentage: string
   useCustom: boolean
   error: {
     persons: string
@@ -17,18 +17,20 @@ export interface FormData {
 // global store for the application
 const useFormStore = defineStore('form-data', () => {
   const data = reactive<FormData>({
-    persons: 0,
+    persons: '',
     tipPercentage: 0,
-    bill: 0,
+    bill: '',
     useCustom: false,
-    customPercentage: 0,
+    customPercentage: '',
     error: {
       persons: '',
       tipPercentage: '',
       bill: ''
     }
   })
-
+  // global values
+  const bill = Number(data.bill)
+  const persons = Number(data.persons)
   // helper function
   const checkFinite = (value: number) => {
     if (value == 0 || !isFinite(value)) {
@@ -41,12 +43,12 @@ const useFormStore = defineStore('form-data', () => {
   const tipPerPerson = computed(() => {
     let percent = 0
     if (data.useCustom) {
-      percent = data.customPercentage
+      percent = Number(data.customPercentage)
     } else {
       percent = data.tipPercentage
     }
 
-    const value = (data.bill * percent) / 100 / data.persons
+    const value = (bill * percent) / 100 / persons
     if (value == Infinity) {
       data.error.persons = "Can't be zero"
     } else {
@@ -55,15 +57,15 @@ const useFormStore = defineStore('form-data', () => {
     return checkFinite(value)
   })
   const perPersonPay = computed(() => {
-    const value = data.bill / data.persons + tipPerPerson.value
+    const value = bill / persons + tipPerPerson.value
     return checkFinite(value)
   })
 
   const reset = () => {
-    data.persons = 0
+    data.persons = ''
     data.tipPercentage = 0
-    data.bill = 0
-    data.customPercentage = 0
+    data.bill = ''
+    data.customPercentage = ''
     data.useCustom = false
   }
 

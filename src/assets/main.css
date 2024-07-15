@@ -10,6 +10,13 @@
     font-weight: 700;
   }
   body {
-    @apply bg-strong-cyan;
+    @apply bg-light-gray-cyan md:h-screen md:grid md:place-items-center;
+  }
+  button {
+    @apply rounded-md text-center text-xl font-semibold p-3 cursor-pointer transition;
+  }
+
+  input {
+    @apply p-2 pl-8 text-right w-full outline-none rounded-md text-xl font-space-mono text-very-dark-cyan font-bold bg-very-light-cyan cursor-pointer focus:border-strong-cyan focus:border;
   }
 }
