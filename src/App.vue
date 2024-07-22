@@ -41,7 +41,7 @@ onMounted(() => {
               :key="number"
               class="focus:outline-yellow-500 focus:outline-3 transition"
               :class="{
-                'bg-strong-cyan text-very-dark-cyan': number == data.tipPercentage,
+                'bg-light-gray-cyan text-very-dark-cyan': number == data.tipPercentage,
                 'bg-very-dark-cyan text-white': number != data.tipPercentage,
               }"
               @click="
@@ -58,6 +58,7 @@ onMounted(() => {
                 data.useCustom = true;
                 data.tipPercentage = 0;
               "
+              :class="{ 'border-strong-cyan border-2 ': data.useCustom }"
             />
           </div>
         </div>

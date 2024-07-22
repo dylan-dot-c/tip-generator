@@ -16,8 +16,9 @@ const info = useFormStore();
 
     <div>
       <button
-        class="bg-strong-cyan text-very-dark-cyan w-full p-4 rounded-md text-center hover:bg-light-gray-cyan transition cursor-pointer opacity-40 hover:opacity-100"
+        class="bg-strong-cyan text-very-dark-cyan w-full p-4 rounded-md text-center transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed opacity-100 enabled:hover:bg-light-gray-cyan"
         @click="info.reset"
+        :disabled="info.perPersonPay == 0 && info.tipPerPerson == 0"
       >
         RESET
       </button>
